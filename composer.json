@@ -2,7 +2,7 @@
     "name": "distilleries/datatable-builder",
     "description": "Datatable generator",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Maxime Francois",
@@ -15,7 +15,7 @@
         "illuminate/database": "4.*",
         "illuminate/view": "4.*",
         "illuminate/filesystem": "4.*",
-        "chumper/datatable": "dev-master",
+        "chumper/datatable": "2.*",
         "distilleries/form-builder": "dev-master"
     },
     "autoload": {
@@ -25,6 +25,5 @@
             "Distilleries\\DatatableBuilder\\": "src/Distilleries"
         }
     },
-    "prefer-stable": true,
     "minimum-stability": "stable"
 }
