@@ -1,7 +1,8 @@
 {
-    "name": "distilleries/datatable",
+    "name": "distilleries/datatable-builder",
     "description": "Datatable generator",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Maxime Francois",
