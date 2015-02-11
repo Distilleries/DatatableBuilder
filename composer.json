@@ -2,11 +2,17 @@
     "name": "distilleries/datatable-builder",
     "description": "Datatable generator",
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "authors": [
         {
             "name": "Maxime Francois",
             "email": "kezho@me.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/Distilleries/Datatable"
         }
     ],
     "require": {
@@ -15,7 +21,7 @@
         "illuminate/database": "4.*",
         "illuminate/view": "4.*",
         "illuminate/filesystem": "4.*",
-        "chumper/datatable": "2.*",
+        "Distilleries/Datatable": "2.3.*",
         "distilleries/form-builder": "dev-master"
     },
     "autoload": {
