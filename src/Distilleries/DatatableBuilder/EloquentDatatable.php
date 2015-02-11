@@ -6,7 +6,7 @@
  * Time: 10:29 AM
  */
 
-namespace Distilleries;
+namespace Distilleries\DatatableBuilder;
 
 
 use \Datatable, \Eloquent, \View, \ReflectionClass, \FormBuilder, \Input;
