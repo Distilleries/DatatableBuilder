@@ -2,7 +2,7 @@
     "name": "distilleries/datatable-builder",
     "description": "Datatable generator",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "authors": [
         {
             "name": "Maxime Francois",
@@ -12,7 +12,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "https://github.com/Distilleries/Datatable"
+            "url":  "git@github.com:Distilleries/Datatable.git"
         }
     ],
     "require": {
