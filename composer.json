@@ -1,0 +1,32 @@
+{
+    "name": "distilleries/datatable",
+    "description": "Datatable generator",
+    "require": {
+        "chumper/datatable": "~2.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maxime Francois",
+            "email": "kezho@me.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/support": "4.*",
+        "illuminate/database": "4.*",
+        "illuminate/view": "4.*",
+        "illuminate/filesystem": "4.*",
+        "chumper/datatable": "dev-master",
+        "distilleries/form-builder": "dev-master"
+    },
+    "autoload": {
+        "classmap": [
+        ],
+        "psr-4": {
+            "Distilleries\\DatatableBuilder\\": "src/Distilleries"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
