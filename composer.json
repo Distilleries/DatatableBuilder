@@ -1,9 +1,6 @@
 {
     "name": "distilleries/datatable",
     "description": "Datatable generator",
-    "require": {
-        "chumper/datatable": "~2.3"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -28,5 +25,5 @@
         }
     },
     "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
