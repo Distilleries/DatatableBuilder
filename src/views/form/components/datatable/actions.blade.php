@@ -1,10 +1,10 @@
-@if(\Verdikt\Helpers\UserUtils::hasAccess($route.'getView'))
+@if(\Distilleries\Expendable\Helpers\UserUtils::hasAccess($route.'getView'))
     <a href="{{ action($route.'getView',$data['id']) }}" class="btn btn-sm blue filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{_('View')}}</a>
 @endif
-@if(\Verdikt\Helpers\UserUtils::hasAccess($route.'getEdit'))
+@if(\Distilleries\Expendable\Helpers\UserUtils::hasAccess($route.'getEdit'))
     <a href="{{ action($route.'getEdit',$data['id']) }}" class="btn btn-sm yellow filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{_('Edit')}}</a>
 @endif
-@if(\Verdikt\Helpers\UserUtils::hasAccess($route.'putDestroy'))
+@if(\Distilleries\Expendable\Helpers\UserUtils::hasAccess($route.'putDestroy'))
         {{ Form::open([
         'url' => action($route.'putDestroy'),
         'method' => 'put',

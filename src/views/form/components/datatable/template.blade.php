@@ -23,5 +23,5 @@
 </table>
 
 @if (!$noScript)
-    @include('admin.form.components.datatable.javascript', array('id' => $id, 'options' => $options, 'callbacks' =>  $callbacks))
+    @include('datatable-builder::form.components.datatable.javascript', array('id' => $id, 'options' => $options, 'callbacks' =>  $callbacks))
 @endif

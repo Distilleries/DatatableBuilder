@@ -10,7 +10,7 @@ namespace Distilleries\DatatableBuilder\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class DatatableBuilderFacade extends Facade {
+class DatatableBuilder extends Facade {
 
     /**
      * Get the registered name of the component.

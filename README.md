@@ -11,7 +11,9 @@ Based on chumper/datatable, It's an abstract class to implement the datatable li
 
 ### Add service provider
 
+```php
     'Distilleries\DatatableBuilder\DatatableBuilderServiceProvider',
+```
 
 ### Add facade
 
