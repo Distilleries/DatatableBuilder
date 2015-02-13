@@ -16,7 +16,7 @@
         "illuminate/view": "4.*",
         "illuminate/filesystem": "4.*",
         "distilleries/datatable": "2.3.*",
-        "distilleries/form-builder": "dev-master"
+        "distilleries/form-builder": "1.*"
     },
     "autoload": {
         "classmap": [
