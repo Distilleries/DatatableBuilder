@@ -8,6 +8,7 @@
 
 namespace Distilleries\DatatableBuilder;
 use Chumper\Datatable\Datatable;
+use \File;
 use Illuminate\Support\ServiceProvider;
 
 class DatatableBuilderServiceProvider extends ServiceProvider {
@@ -29,6 +30,8 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
         {
             return new Datatable;
         });
+
+        $this->registerCommands();
     }
 
     /**
@@ -39,5 +42,21 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     public function provides()
     {
         return array('datatable');
+    }
+
+
+    protected function registerCommands()
+    {
+        $files = File::allFiles(__DIR__ . '/Console/');
+
+        foreach ($files as $file)
+        {
+            if (strpos($file->getPathName(), 'Lib') === false)
+            {
+                $this->commands('Distilleries\DatatableBuilder\Console\\' . preg_replace('/\.php/i', '', $file->getFilename()));
+            }
+
+
+        }
     }
 }
