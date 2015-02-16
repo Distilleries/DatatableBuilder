@@ -11,6 +11,7 @@ It's an abstract class to implement the datatable like [the form generator](http
 2. [Basic usage](#basic-usage)
 3. [Closure](#closure)
 4. [Filters](#filters)
+5. [Styles](#styles)
   
 
 
