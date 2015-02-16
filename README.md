@@ -152,7 +152,7 @@ You can return a template if you want:
 ``` php
     $this->add('html_row', function ($model)
     {
-        return View::make('admin.address.html_row,[
+        return View::make('admin.address.html_row',[
         ])->render();
     });
 ```   
