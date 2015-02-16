@@ -16,7 +16,7 @@ It's an abstract class to implement the datatable like [the form generator](http
 
 
 ##Installation
-
+  
 Add on your composer.json
 
 ``` json
@@ -46,13 +46,19 @@ And Facade (also in `config/app.php`)
     ]
 ```
 
+Add the javascript on your bower dependencies:
+``` json
+    "dependencies": {
+        "datatables": "~1.10.4",
+    }
+```
 ## Basic usage
 
 Creating form classes is easy. Lets assume PSR-4 is set for loading namespace `Project` in `app/Project` folder.
  With a simple artisan command I can create form:
 
 ``` sh
-    php artisan datatablebuilder:make app/Project/Datatables/PostDatatable
+php artisan datatablebuilder:make app/Project/Datatables/PostDatatable
 ```
 
 you create form class in path `app/Project/Datatables/PostDatatable.php` that looks like this:
