@@ -2,6 +2,8 @@
 
 use Chumper\Datatable\Datatable;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\AliasLoader;
 
 class DatatableBuilderServiceProvider extends ServiceProvider {
 
@@ -10,7 +12,6 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
 
     public function boot()
     {
-
         $this->loadViewsFrom(__DIR__.'/../../views', $this->package);
         $this->publishes([
             __DIR__.'/../../config/config.php'    => config_path($this->package.'.php'),
@@ -40,7 +41,8 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
             return new Datatable;
         });
 
-        $this->registerCommands($this->app['file']);
+        $this->alias();
+        $this->registerCommands(new Filesystem);
     }
 
     /**
@@ -67,5 +69,29 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
 
 
         }
+    }
+
+    public function alias(){
+
+        AliasLoader::getInstance()->alias(
+            'View',
+            'Illuminate\Support\Facades\View'
+        );
+        AliasLoader::getInstance()->alias(
+            'FormBuilder',
+            'Distilleries\FormBuilder\Facades\FormBuilder'
+        );
+        AliasLoader::getInstance()->alias(
+            'Input',
+            'Illuminate\Support\Facades\Input'
+        );
+        AliasLoader::getInstance()->alias(
+            'Schema',
+            'Illuminate\Support\Facades\Schema'
+        );
+        AliasLoader::getInstance()->alias(
+            'Route',
+            'Illuminate\Support\Facades\Route'
+        );
     }
 }

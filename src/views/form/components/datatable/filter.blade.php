@@ -15,9 +15,9 @@
                         </div>
                         <div class="portlet-body form" style="display: none">
                             <div class="form-horizontal form-bordered">
-                            {{ form_start($form) }}
+                            {!! form_start($form) !!}
                                 <div class="form-body">
-                                    {{ form_rest($form) }}
+                                    {!! form_rest($form) !!}
                                 </div>
                                 <div class="form-actions ">
                                     <div class="btn-set pull-right">
@@ -25,7 +25,7 @@
                                         <button class="btn btn-sm red filter-cancel"><i class="glyphicon glyphicon-remove"></i> {{ _('Reset') }}</button>
                                     </div>
                                 </div>
-                            {{ form_end($form) }}
+                            {!! form_end($form) !!}
                             </div>
                         </div>
                     </div>
