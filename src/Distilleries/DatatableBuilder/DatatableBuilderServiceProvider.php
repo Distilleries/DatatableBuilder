@@ -1,22 +1,25 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mfrancois
- * Date: 11/02/2015
- * Time: 10:19 AM
- */
+<?php namespace Distilleries\DatatableBuilder;
 
-namespace Distilleries\DatatableBuilder;
 use Chumper\Datatable\Datatable;
-use \File;
 use Illuminate\Support\ServiceProvider;
 
 class DatatableBuilderServiceProvider extends ServiceProvider {
 
 
+    protected $package = 'datatable-builder';
+
     public function boot()
     {
-        $this->package('distilleries/datatable-builder');
+
+        $this->loadViewsFrom(__DIR__.'/../../views', $this->package);
+        $this->publishes([
+            __DIR__.'/../../config/config.php'    => config_path($this->package.'.php'),
+            __DIR__.'/../../config/datatable.php' => config_path('chumper_datatable.php'),
+        ]);
+        $this->publishes([
+            __DIR__.'/../../views' => base_path('resources/views/vendor/'.$this->package),
+        ], 'views');
+
     }
 
     /**
@@ -26,12 +29,18 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['datatable'] = $this->app->share(function($app)
+        $this->mergeConfigFrom(
+            __DIR__.'/../../config/config.php',
+            $this->package
+        );
+
+
+        $this->app['datatable'] = $this->app->share(function ($app)
         {
             return new Datatable;
         });
 
-        $this->registerCommands();
+        $this->registerCommands($this->app['file']);
     }
 
     /**
@@ -45,15 +54,15 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     }
 
 
-    protected function registerCommands()
+    protected function registerCommands($filesystem)
     {
-        $files = File::allFiles(__DIR__ . '/Console/');
+        $files = $filesystem->allFiles(__DIR__.'/Console/');
 
         foreach ($files as $file)
         {
             if (strpos($file->getPathName(), 'Lib') === false)
             {
-                $this->commands('Distilleries\DatatableBuilder\Console\\' . preg_replace('/\.php/i', '', $file->getFilename()));
+                $this->commands('Distilleries\DatatableBuilder\Console\\'.preg_replace('/\.php/i', '', $file->getFilename()));
             }
 
 

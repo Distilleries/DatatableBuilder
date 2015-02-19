@@ -1,15 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mfrancois
- * Date: 11/02/2015
- * Time: 10:29 AM
- */
+<?php namespace Distilleries\DatatableBuilder;
 
-namespace Distilleries\DatatableBuilder;
-
-
-use \Datatable, \Eloquent, \View, \ReflectionClass, \FormBuilder, \Input;
+use \Datatable;
+use \Eloquent;
+use \View;
+use \ReflectionClass;
+use \FormBuilder;
+use \Input;
 
 abstract class EloquentDatatable {
 
