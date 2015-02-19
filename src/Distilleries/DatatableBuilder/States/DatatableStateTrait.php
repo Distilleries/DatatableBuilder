@@ -1,9 +1,4 @@
-<?php
-
-
-namespace Distilleries\DatatableBuilder\States;
-
-use \View;
+<?php namespace Distilleries\DatatableBuilder\States;
 
 trait DatatableStateTrait {
 
