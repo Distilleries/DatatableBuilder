@@ -12,6 +12,7 @@ trait DatatableStateTrait {
      * Injected by the constructor
      */
     protected $datatable;
+    protected $model;
 
 
     // ------------------------------------------------------------------------------------------------
@@ -22,6 +23,7 @@ trait DatatableStateTrait {
     {
         $this->datatable->build();
         $datatable = $this->datatable->generateHtmlRender();
+
         return view('datatable-builder::form.state.datatable')->with([
             'datatable' => $datatable
         ]);
