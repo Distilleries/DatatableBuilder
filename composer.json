@@ -10,12 +10,13 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "illuminate/support": "4.*",
-        "illuminate/database": "4.*",
-        "illuminate/view": "4.*",
-        "illuminate/filesystem": "4.*",
-        "distilleries/datatable": "2.3.*",
-        "distilleries/form-builder": "1.*"
+        "illuminate/support": "5.*",
+        "illuminate/support": "5.*",
+        "illuminate/html": "5.*",
+        "illuminate/view": "5.*",
+        "illuminate/filesystem": "5.*",
+        "chumper/datatable": "dev-develop",
+        "distilleries/form-builder": "2.*"
     },
     "autoload": {
         "classmap": [
@@ -24,5 +25,6 @@
             "Distilleries\\DatatableBuilder\\": "src/Distilleries/DatatableBuilder"
         }
     },
-    "minimum-stability": "stable"
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }

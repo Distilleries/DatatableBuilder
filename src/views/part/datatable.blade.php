@@ -1,4 +1,3 @@
-
 @section('datatable')
 @if(!empty($filters))
     {{ $filters }}
@@ -16,10 +15,10 @@
     <div class="portlet-body">
         <div class="dataTables_wrapper no-footer">
             <div class="">
-            {{ Datatable::table()
+            {!! Datatable::table()
                         ->addColumn($colomns_display)
                         ->setUrl(action($route))
-                        ->render() }}
+                        ->render() !!}
             </div>
         </div>
     </div>

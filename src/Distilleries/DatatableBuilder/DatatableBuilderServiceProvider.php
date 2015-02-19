@@ -1,22 +1,31 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mfrancois
- * Date: 11/02/2015
- * Time: 10:19 AM
- */
+<?php namespace Distilleries\DatatableBuilder;
 
-namespace Distilleries\DatatableBuilder;
 use Chumper\Datatable\Datatable;
-use \File;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\AliasLoader;
 
 class DatatableBuilderServiceProvider extends ServiceProvider {
 
 
+    protected $package = 'datatable-builder';
+
     public function boot()
     {
-        $this->package('distilleries/datatable-builder');
+        $this->loadViewsFrom(__DIR__.'/../../views', $this->package);
+        $this->publishes([
+            __DIR__.'/../../config/config.php'    => config_path($this->package.'.php'),
+            __DIR__.'/../../config/datatable.php' => config_path('chumper_datatable.php'),
+        ]);
+
+        $this->publishes([
+            __DIR__.'/../../views'        => base_path('resources/views/vendor/'.$this->package),
+        ], 'views');
+
+        $this->publishes([
+            __DIR__.'/../../resources/assets' => base_path('resources/assets/vendor/'.$this->package),
+        ], 'assets');
+
     }
 
     /**
@@ -26,18 +35,25 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app['datatable'] = $this->app->share(function($app)
+        $this->mergeConfigFrom(
+            __DIR__.'/../../config/config.php',
+            $this->package
+        );
+
+
+        $this->app['datatable'] = $this->app->share(function()
         {
             return new Datatable;
         });
 
-        $this->registerCommands();
+        $this->alias();
+        $this->registerCommands(new Filesystem);
     }
 
     /**
      * Get the services provided by the provider.
      *
-     * @return array
+     * @return string[]
      */
     public function provides()
     {
@@ -45,18 +61,45 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     }
 
 
-    protected function registerCommands()
+    /**
+     * @param Filesystem $filesystem
+     */
+    protected function registerCommands($filesystem)
     {
-        $files = File::allFiles(__DIR__ . '/Console/');
+        $files = $filesystem->allFiles(__DIR__.'/Console/');
 
         foreach ($files as $file)
         {
             if (strpos($file->getPathName(), 'Lib') === false)
             {
-                $this->commands('Distilleries\DatatableBuilder\Console\\' . preg_replace('/\.php/i', '', $file->getFilename()));
+                $this->commands('Distilleries\DatatableBuilder\Console\\'.preg_replace('/\.php/i', '', $file->getFilename()));
             }
 
 
         }
+    }
+
+    public function alias() {
+
+        AliasLoader::getInstance()->alias(
+            'View',
+            'Illuminate\Support\Facades\View'
+        );
+        AliasLoader::getInstance()->alias(
+            'FormBuilder',
+            'Distilleries\FormBuilder\Facades\FormBuilder'
+        );
+        AliasLoader::getInstance()->alias(
+            'Input',
+            'Illuminate\Support\Facades\Input'
+        );
+        AliasLoader::getInstance()->alias(
+            'Schema',
+            'Illuminate\Support\Facades\Schema'
+        );
+        AliasLoader::getInstance()->alias(
+            'Route',
+            'Illuminate\Support\Facades\Route'
+        );
     }
 }

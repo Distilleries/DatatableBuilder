@@ -1,6 +1,6 @@
 <?php  namespace Distilleries\DatatableBuilder\Console\Lib\Generators;
 
-class DatatableGenerator extends Generator
+class DatatableGenerator extends \Kris\LaravelFormBuilder\Console\FormGenerator
 {
 
     /**

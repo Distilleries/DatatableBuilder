@@ -1,26 +1,21 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mfrancois
- * Date: 11/02/2015
- * Time: 10:29 AM
- */
+<?php namespace Distilleries\DatatableBuilder;
 
-namespace Distilleries\DatatableBuilder;
-
-
-use \Datatable, \Eloquent, \View, \ReflectionClass, \FormBuilder, \Input;
+use \Datatable;
+use Illuminate\Database\Eloquent\Model;
+use \ReflectionClass;
+use \FormBuilder;
+use \Input;
 
 abstract class EloquentDatatable {
 
     protected $model;
     protected $colomns;
-    protected $form           = null;
+    protected $form = null;
     protected $colomnsDisplay = [];
 
     // ------------------------------------------------------------------------------------------------
 
-    public function __construct(Eloquent $model = null)
+    public function __construct(Model $model = null)
     {
         $this->model = $model;
     }
@@ -28,7 +23,7 @@ abstract class EloquentDatatable {
     /**
      * @param Eloquent $model
      */
-    public function setModel(Eloquent $model)
+    public function setModel(Model $model)
     {
         $this->model = $model;
     }
@@ -36,6 +31,10 @@ abstract class EloquentDatatable {
 
     // ------------------------------------------------------------------------------------------------
 
+    /**
+     * @param string $name
+     * @param \Closure $closure
+     */
     public function add($name, $closure = null, $translation = '')
     {
         if (!empty($closure))
@@ -55,6 +54,10 @@ abstract class EloquentDatatable {
 
     }
 
+    /**
+     * @param string $translation
+     * @param string $name
+     */
     public function addTranslation($name, $translation)
     {
         $this->colomnsDisplay[] = (!empty($translation)) ? $translation : ucfirst($name);
@@ -69,7 +72,7 @@ abstract class EloquentDatatable {
 
         foreach ($allInput as $name => $input)
         {
-            if (in_array($name, $columns) and $input != '')
+            if (in_array($name, $columns) && $input != '')
             {
 
                 $this->model = $this->model->where($name, '=', $input);
@@ -115,9 +118,9 @@ abstract class EloquentDatatable {
     public function setClassRow($datatable)
     {
         //DT_RowClass
-        $datatable->setRowClass(function ($row)
+        $datatable->setRowClass(function($row)
         {
-            return (isset($row->status) and empty($row->status)) ? 'danger' : '';
+            return (isset($row->status) && empty($row->status)) ? 'danger' : '';
         });
 
         return $datatable;
@@ -126,13 +129,9 @@ abstract class EloquentDatatable {
     // ------------------------------------------------------------------------------------------------
     public function generateHtmlRender($template = 'datatable-builder::part.datatable', $route = '')
     {
-
-
-        $action = explode('@', \Route::currentRouteAction());
-
-        return View::make($template, [
+        return view($template, [
             'colomns_display' => $this->colomnsDisplay,
-            'route'           => !empty($route) ? $route : $action[0] . '@getDatatable',
+            'route'           => !empty($route) ? $route : $this->getControllerNameForAction().'@getDatatable',
             'filters'         => $this->addFilter(),
         ]);
     }
@@ -143,13 +142,11 @@ abstract class EloquentDatatable {
 
         $reflection = new ReflectionClass(get_class($this));
 
-        $this->add('actions', function ($model) use ($template, $reflection)
+        $this->add('actions', function($model) use ($template, $reflection, $route)
         {
-            $action = explode('@', \Route::currentRouteAction());
-
-            return View::make($template, array(
+            return view($template, array(
                 'data'  => $model->toArray(),
-                'route' => !empty($route) ? $route . '@' : reset($action) . '@'
+                'route' => !empty($route) ? $route.'@' : $this->getControllerNameForAction().'@'
             ))->render();
         });
     }
@@ -159,18 +156,33 @@ abstract class EloquentDatatable {
     // ------------------------------------------------------------------------------------------------
 
 
-    protected function addFilter($template='datatable-builder::form.components.datatable.filter')
+    protected function addFilter($template = 'datatable-builder::form.components.datatable.filter')
     {
         $this->form = FormBuilder::plain();
         $this->filters();
 
-        $filter_content = View::make($template, [
+        $filter_content = view($template, [
             'form' => $this->form
         ])->render();
 
 
         return $filter_content;
 
+    }
+
+    // ------------------------------------------------------------------------------------------------
+
+    protected function getControllerNameForAction() {
+
+        $namespace = \Route::current()->getAction()['namespace'];
+        $action    = explode('@', \Route::currentRouteAction());
+
+        if (!empty($namespace))
+        {
+            $action[0] = ltrim(str_replace($namespace, '', $action[0]), '\\');
+        }
+
+        return $action[0];
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -187,5 +199,4 @@ abstract class EloquentDatatable {
     // ------------------------------------------------------------------------------------------------
 
     abstract public function build();
-
 }

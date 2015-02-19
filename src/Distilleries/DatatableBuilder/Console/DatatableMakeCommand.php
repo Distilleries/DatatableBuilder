@@ -1,12 +1,13 @@
 <?php namespace Distilleries\DatatableBuilder\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Distilleries\DatatableBuilder\Console\Lib\Generators\DatatableGenerator;
 
-class DatatableMakeCommand extends Command
+class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
 {
 
     /**
@@ -14,7 +15,7 @@ class DatatableMakeCommand extends Command
      *
      * @var string
      */
-    protected $name = 'datatablebuilder:make';
+    protected $name = 'datatable:make';
 
     /**
      * The filesystem instance.
@@ -31,64 +32,16 @@ class DatatableMakeCommand extends Command
     protected $description = 'Creates a datable builder class.';
 
     /**
-     * @var FormGenerator
+     * @var DatatableGenerator
      */
     protected $formGenerator;
 
     public function __construct(Filesystem $files, DatatableGenerator $formGenerator)
     {
-        parent::__construct();
-        $this->files = $files;
+        parent::__construct($files);
         $this->formGenerator = $formGenerator;
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function fire()
-    {
-        $path = $this->getNameInput();
-
-        if ($this->files->exists($path)) {
-            return $this->error('Datatable already exists!');
-        }
-
-
-
-        $this->makeDirectory($path);
-
-        $this->files->put($path.'.php', $this->buildClass($path));
-
-        $this->info('Datatable created successfully.');
-    }
-
-    /**
-     * Build the directory for the class if necessary.
-     *
-     * @param  string $path
-     * @return string
-     */
-    protected function makeDirectory($path)
-    {
-        if (!$this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0777, true, true);
-        }
-    }
-
-    /**
-     * Build the controller class with the given name.
-     *
-     * @param  string $name
-     * @return string
-     */
-    protected function buildClass($name)
-    {
-        $stub = $this->files->get($this->getStub());
-
-        return $this->replaceNamespace($stub, $name)->replaceClass($stub, $name);
-    }
 
     /**
      * Get the console command arguments.
@@ -164,7 +117,7 @@ class DatatableMakeCommand extends Command
      */
     protected function getNameInput()
     {
-        return $this->argument('name');
+        return str_replace('/', '\\', $this->argument('name'));
     }
 
     /**
@@ -174,6 +127,6 @@ class DatatableMakeCommand extends Command
      */
     protected function getStub()
     {
-        return __DIR__ . '/Lib/stubs/datatable-class-template.stub';
+        return __DIR__.'/Lib/stubs/datatable-class-template.stub';
     }
 }
