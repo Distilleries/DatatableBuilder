@@ -5,7 +5,7 @@ namespace Distilleries\DatatableBuilder\States;
 
 use \View;
 
-trait DatatableStateTrait{
+trait DatatableStateTrait {
 
     /**
      * @var \Distilleries\DatatableBuilder\EloquentDatatable $datatable
@@ -22,12 +22,9 @@ trait DatatableStateTrait{
     {
         $this->datatable->build();
         $datatable = $this->datatable->generateHtmlRender();
-        $content   = View::make('datatable-builder::form.state.datatable')->with([
+        return view('datatable-builder::form.state.datatable')->with([
             'datatable' => $datatable
         ]);
-
-        $this->addToLayout($content, 'content');
-
     }
 
     // ------------------------------------------------------------------------------------------------

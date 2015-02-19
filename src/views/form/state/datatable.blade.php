@@ -1,7 +1,5 @@
-@section('content')
-        <div class="row">
-        <div class="col-md-12">
-            @yield('datatable')
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        @yield('datatable')
     </div>
-@stop
+</div>
