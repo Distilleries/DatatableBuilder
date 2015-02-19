@@ -174,6 +174,6 @@ class DatatableMakeCommand extends Command
      */
     protected function getStub()
     {
-        return __DIR__ . '/Lib/stubs/datatable-class-template.stub';
+        return __DIR__.'/Lib/stubs/datatable-class-template.stub';
     }
 }

@@ -31,7 +31,7 @@ class Generator {
         $className = array_pop($fullNamespacedPath);
 
         return (object) [
-            'namespace' => ltrim(str_replace('\\\\', '\\', join('\\', $fullNamespacedPath)),'\\'),
+            'namespace' => ltrim(str_replace('\\\\', '\\', join('\\', $fullNamespacedPath)), '\\'),
             'className' => $className
         ];
     }
@@ -45,14 +45,14 @@ class Generator {
     protected function parseFields($fields)
     {
         $fieldsArray = explode(',', $fields);
-        $text        = '$this' . "\n";
+        $text        = '$this'."\n";
 
         foreach ($fieldsArray as $field)
         {
             $text .= $this->prepareAdd($field, end($fieldsArray) == $field);
         }
 
-        return $text . ';';
+        return $text.';';
     }
 
 } 
