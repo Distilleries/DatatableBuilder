@@ -32,6 +32,5 @@ trait DatatableStateTrait {
         $this->datatable->build();
 
         return $this->datatable->generateColomns();
-
     }
-} 
+}

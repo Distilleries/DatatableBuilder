@@ -56,6 +56,7 @@ abstract class EloquentDatatable {
 
     /**
      * @param string $translation
+     * @param string $name
      */
     public function addTranslation($name, $translation)
     {
@@ -71,7 +72,7 @@ abstract class EloquentDatatable {
 
         foreach ($allInput as $name => $input)
         {
-            if (in_array($name, $columns) and $input != '')
+            if (in_array($name, $columns) && $input != '')
             {
 
                 $this->model = $this->model->where($name, '=', $input);
@@ -119,7 +120,7 @@ abstract class EloquentDatatable {
         //DT_RowClass
         $datatable->setRowClass(function($row)
         {
-            return (isset($row->status) and empty($row->status)) ? 'danger' : '';
+            return (isset($row->status) && empty($row->status)) ? 'danger' : '';
         });
 
         return $datatable;
@@ -141,7 +142,7 @@ abstract class EloquentDatatable {
 
         $reflection = new ReflectionClass(get_class($this));
 
-        $this->add('actions', function($model) use ($template, $reflection)
+        $this->add('actions', function($model) use ($template, $reflection, $route)
         {
             return view($template, array(
                 'data'  => $model->toArray(),

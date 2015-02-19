@@ -41,7 +41,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
         );
 
 
-        $this->app['datatable'] = $this->app->share(function($app)
+        $this->app['datatable'] = $this->app->share(function()
         {
             return new Datatable;
         });
