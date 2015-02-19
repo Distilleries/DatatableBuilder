@@ -30,17 +30,24 @@
 
         },
         @foreach ($options as $k => $o)
-            {{ json_encode($k) }}: {{ json_encode($o) }},
+            {!! json_encode($k) !!}: {!! json_encode($o) !!},
         @endforeach
 
         @foreach ($callbacks as $k => $o)
-            {{ json_encode($k) }}: {{ $o }},
+            {!! json_encode($k) !!}: {!! $o !!},
         @endforeach
 
         }).on( 'draw.dt', function () {
-              Metronic.initAjax();
+
+            if(typeof(Metronic) != 'undefined'){
+                Metronic.initAjax();
+            }
+
         });
-        jQuery('select',jQuery('#{{ $id }}_wrapper')).select2();
+
+        if(typeof(jQuery.select2) != 'undefined'){
+            jQuery('select',jQuery('#{{ $id }}_wrapper')).select2();
+        }
         dist.Form.Fields.DatatableUtils.initFilters('.filter-cancel','.filter-submit');
     // custom values are available via $values array
     });

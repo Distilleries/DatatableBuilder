@@ -17,9 +17,14 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
             __DIR__.'/../../config/config.php'    => config_path($this->package.'.php'),
             __DIR__.'/../../config/datatable.php' => config_path('chumper_datatable.php'),
         ]);
+
         $this->publishes([
-            __DIR__.'/../../views' => base_path('resources/views/vendor/'.$this->package),
+            __DIR__.'/../../views'        => base_path('resources/views/vendor/'.$this->package),
         ], 'views');
+
+        $this->publishes([
+            __DIR__.'/../../resources/assets' => base_path('resources/assets/vendor/'.$this->package),
+        ], 'assets');
 
     }
 

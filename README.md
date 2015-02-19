@@ -1,4 +1,9 @@
-#Laravel 4  Datatable Builder
+[![Code quality](http://img.shields.io/scrutinizer/g/distilleries/datatablebuilder.svg?style=flat)](https://scrutinizer-ci.com/g/distilleries/datatablebuilder/?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
+[![Latest Stable Version](https://img.shields.io/packagist/v/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE) 
+
+#Laravel 5  Datatable Builder
 
 
 Based on [chumper/datatable](https://github.com/chumper/datatable).
@@ -12,6 +17,7 @@ It's an abstract class to implement the datatable like [the form generator](http
 3. [Closure](#closure)
 4. [Filters](#filters)
 5. [Styles](#styles)
+6. [Controller](#controller)
   
 
 
@@ -32,6 +38,7 @@ Add Service provider to `config/app.php`:
 ``` php
     'providers' => [
         // ...
+	   'Distilleries\FormBuilder\FormBuilderServiceProvider',
        'Distilleries\DatatableBuilder\DatatableBuilderServiceProvider',
     ]
 ```
@@ -42,6 +49,7 @@ And Facade (also in `config/app.php`)
 ``` php
     'aliases' => [
         // ...
+		'FormBuilder'     => 'Distilleries\FormBuilder\Facades\FormBuilder',
         'Datatable'       => 'Distilleries\DatatableBuilder\Facades\DatatableBuilder',
     ]
 ```
@@ -52,19 +60,44 @@ Add the javascript on your bower dependencies:
         "datatables": "~1.10.4",
     }
 ```
-## Basic usage
 
-Creating form classes is easy. Lets assume PSR-4 is set for loading namespace `Project` in `app/Project` folder.
- With a simple artisan command I can create form:
 
-``` sh
-php artisan datatablebuilder:make app/Project/Datatables/PostDatatable
+Export the configuration:
+
+```ssh
+php artisan vendor:publish --provider="Distilleries\DatatableBuilder\DatatableBuilderServiceProvider"
 ```
 
-you create form class in path `app/Project/Datatables/PostDatatable.php` that looks like this:
+Export the views  (optional):
+
+```ssh
+php artisan vendor:publish --provider="Distilleries\DatatableBuilder\DatatableBuilderServiceProvider"  --tag="views"
+```
+
+Export the Javascript assets  (optional):
+
+Include the javascript with gulp or grunt `vendor/distilleries/datatable-builder/resources/**/*`.
+If you don't use a task manager or you want override the javascript just publish those with the command line:
+
+```ssh
+php artisan vendor:publish --provider="Distilleries\DatatableBuilder\DatatableBuilderServiceProvider"  --tag="assets"
+```
+You can find those in `resources/assets/vendor/datatable-builder`.
+
+
+## Basic usage
+
+Creating form classes is easy.
+With a simple artisan command I can create a datatable:
+
+``` sh
+php artisan datatable:make Datatables/PostDatatable
+```
+
+you create form class in path `app/Datatables/PostDatatable.php` that looks like this:
 
 ``` php
-<?php namespace Project\Datatables;
+<?php namespace App\Datatables;
 
 use Distilleries\DatatableBuilder\EloquentDatatable;
 
@@ -84,13 +117,13 @@ You can add fields which you want when creating command like this:
 
 
 ``` sh
-php artisan datatablebuilder:make app/Project/Datatables/SongDatatable --fields="name, lyrics"
+php artisan datatable:make Datatables/SongDatatable --fields="name, lyrics"
 ```
 
-And that will create form in path `app/Project/Forms/SongForm.php` with content:
+And that will create a datatable in path `app/Datatables/SongDatatable.php` with content:
 
 ``` php
-<?php namespace Project\Datatables;
+<?php namespace App\Datatables;
 
 use Distilleries\DatatableBuilder\EloquentDatatable;
 
@@ -106,7 +139,6 @@ class SongDatatable extends EloquentDatatable
 
     }
 }
-
 ```
 
 The method `add` have in param:
@@ -161,7 +193,7 @@ You can return a template if you want:
 ## Filters
 You can use complex filter to filter your datatable.
 To do that I use the library [FormBuilder](https://github.com/Distilleries/FormBuilder).
-All the datatable have a plain form filter. If you had field on this forn that display the filters.
+All the datatable have a plain form filter. If you had field on this form that display the filters.
 
 For example we want all the user only online.
 
@@ -238,3 +270,90 @@ If the status exist and it is empty we add the danger class to display it in red
         return $datatable;
     }
 ```
+
+##Controller
+You can use the trait `Distilleries\DatatableBuilder\States\DatatableStateTrait` to add in your controller the default methods use with the datatable.
+
+Example:
+I created a controller `app/Http/Controllers/DatatableController`:
+
+```php
+<?php namespace App\Http\Controllers;
+
+use App\Datatables\UserDatatable;
+
+class DatatableController extends Controller {
+
+	use \Distilleries\DatatableBuilder\States\DatatableStateTrait;
+	/*
+	|--------------------------------------------------------------------------
+	| Welcome Controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller renders the "marketing page" for the application and
+	| is configured to only allow guests. Like most of the other sample
+	| controllers, you are free to modify or remove it as you desire.
+	|
+	*/
+
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct(\App\User $model, UserDatatable $datatable)
+	{
+		$this->model = $model;
+		$this->datatable = $datatable;
+	}
+
+	/**
+	 * Show the application welcome screen to the user.
+	 *
+	 * @return Response
+	 */
+	public function getIndex()
+	{
+		return view('welcome',[
+			'datatable'=>$this->getIndexDatatable()
+		]);
+	}
+
+}
+```
+
+I add the controller on the route file :
+
+```php
+Route::controllers([
+	'datatable' => 'DatatableController'
+]);
+```
+
+Like you can see I inject the model and the datatable on the constructor.
+On the welcome template I put:
+
+```php
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="/vendor/datatable-builder/js/datatable.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			{!! $datatable !!}
+		</div>
+	</body>
+</html>
+```
+That it you have your datatable from the user model.

@@ -128,19 +128,9 @@ abstract class EloquentDatatable {
     // ------------------------------------------------------------------------------------------------
     public function generateHtmlRender($template = 'datatable-builder::part.datatable', $route = '')
     {
-
-        $namespace = \Route::current()->getAction()['namespace'];
-        $action    = explode('@', \Route::currentRouteAction());
-
-        if (!empty($namespace))
-        {
-            $action[0] = ltrim(str_replace($namespace, '', $action[0]), '\\');
-        }
-
-
         return view($template, [
             'colomns_display' => $this->colomnsDisplay,
-            'route'           => !empty($route) ? $route : $action[0].'@getDatatable',
+            'route'           => !empty($route) ? $route : $this->getControllerNameForAction().'@getDatatable',
             'filters'         => $this->addFilter(),
         ]);
     }
@@ -153,11 +143,9 @@ abstract class EloquentDatatable {
 
         $this->add('actions', function($model) use ($template, $reflection)
         {
-            $action = explode('@', \Route::currentRouteAction());
-
             return view($template, array(
                 'data'  => $model->toArray(),
-                'route' => !empty($route) ? $route.'@' : reset($action).'@'
+                'route' => !empty($route) ? $route.'@' : $this->getControllerNameForAction().'@'
             ))->render();
         });
     }
@@ -183,6 +171,21 @@ abstract class EloquentDatatable {
 
     // ------------------------------------------------------------------------------------------------
 
+    protected function getControllerNameForAction(){
+
+        $namespace = \Route::current()->getAction()['namespace'];
+        $action    = explode('@', \Route::currentRouteAction());
+
+        if (!empty($namespace))
+        {
+            $action[0] = ltrim(str_replace($namespace, '', $action[0]), '\\');
+        }
+
+        return $action[0];
+    }
+
+    // ------------------------------------------------------------------------------------------------
+
     public function filters()
     {
 
@@ -195,5 +198,4 @@ abstract class EloquentDatatable {
     // ------------------------------------------------------------------------------------------------
 
     abstract public function build();
-
 }
