@@ -36,7 +36,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
         );
 
 
-        $this->app['datatable'] = $this->app->share(function ($app)
+        $this->app['datatable'] = $this->app->share(function($app)
         {
             return new Datatable;
         });
@@ -48,7 +48,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     /**
      * Get the services provided by the provider.
      *
-     * @return array
+     * @return string[]
      */
     public function provides()
     {
@@ -56,6 +56,9 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     }
 
 
+    /**
+     * @param Filesystem $filesystem
+     */
     protected function registerCommands($filesystem)
     {
         $files = $filesystem->allFiles(__DIR__.'/Console/');
@@ -71,7 +74,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
         }
     }
 
-    public function alias(){
+    public function alias() {
 
         AliasLoader::getInstance()->alias(
             'View',

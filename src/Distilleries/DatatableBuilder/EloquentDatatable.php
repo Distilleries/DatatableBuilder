@@ -31,6 +31,10 @@ abstract class EloquentDatatable {
 
     // ------------------------------------------------------------------------------------------------
 
+    /**
+     * @param string $name
+     * @param \Closure $closure
+     */
     public function add($name, $closure = null, $translation = '')
     {
         if (!empty($closure))
@@ -50,6 +54,9 @@ abstract class EloquentDatatable {
 
     }
 
+    /**
+     * @param string $translation
+     */
     public function addTranslation($name, $translation)
     {
         $this->colomnsDisplay[] = (!empty($translation)) ? $translation : ucfirst($name);
@@ -110,7 +117,7 @@ abstract class EloquentDatatable {
     public function setClassRow($datatable)
     {
         //DT_RowClass
-        $datatable->setRowClass(function ($row)
+        $datatable->setRowClass(function($row)
         {
             return (isset($row->status) and empty($row->status)) ? 'danger' : '';
         });
@@ -144,7 +151,7 @@ abstract class EloquentDatatable {
 
         $reflection = new ReflectionClass(get_class($this));
 
-        $this->add('actions', function ($model) use ($template, $reflection)
+        $this->add('actions', function($model) use ($template, $reflection)
         {
             $action = explode('@', \Route::currentRouteAction());
 
