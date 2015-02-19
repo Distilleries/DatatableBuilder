@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mfrancois
- * Date: 11/02/2015
- * Time: 10:24 AM
- */
+     * Created by PhpStorm.
+     * User: mfrancois
+     * Date: 11/02/2015
+     * Time: 10:24 AM
+     */
 
 namespace Distilleries\DatatableBuilder\Facades;
 

@@ -171,7 +171,7 @@ abstract class EloquentDatatable {
 
     // ------------------------------------------------------------------------------------------------
 
-    protected function getControllerNameForAction(){
+    protected function getControllerNameForAction() {
 
         $namespace = \Route::current()->getAction()['namespace'];
         $action    = explode('@', \Route::currentRouteAction());
