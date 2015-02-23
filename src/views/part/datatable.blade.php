@@ -1,6 +1,6 @@
 @section('datatable')
 @if(!empty($filters))
-    {{ $filters }}
+    {!! $filters !!}
 @endif
 
 <div class="portlet box green-haze">

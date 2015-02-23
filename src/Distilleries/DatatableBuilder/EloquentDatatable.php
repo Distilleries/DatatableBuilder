@@ -176,13 +176,7 @@ abstract class EloquentDatatable {
 
         $namespace = \Route::current()->getAction()['namespace'];
         $action    = explode('@', \Route::currentRouteAction());
-
-        if (!empty($namespace))
-        {
-            $action[0] = ltrim(str_replace($namespace, '', $action[0]), '\\');
-        }
-
-        return $action[0];
+        return '\\'.$action[0];
     }
 
     // ------------------------------------------------------------------------------------------------
