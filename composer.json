@@ -24,5 +24,11 @@
             "Distilleries\\DatatableBuilder\\": "src/Distilleries/DatatableBuilder"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "orchestra/database": "~3.0",
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "~4.5",
+        "mockery/mockery": "0.9.*"
+    }
 }
