@@ -5,16 +5,16 @@
 
         "language": {
             "aria": {
-                "sortAscending": "{{_(": activate to sort column ascending")}}",
-                "sortDescending":  "{{_(": activate to sort column descending")}}"
+                "sortAscending":"{{ trans('datatable-builder::datatable.activate_to_sort_asc') }}",
+                "sortDescending": "{{ trans('datatable-builder::datatable.activate_to_sort_desc') }}"
             },
-            "emptyTable":  "{{_("No data available in table")}}",
-            "info":  "{{_("Showing _START_ to _END_ of _TOTAL_ entries")}}",
-            "infoEmpty":  "{{_("No entries found")}}",
-            "infoFiltered":  "{{_("(filtered1 from _MAX_ total entries)")}}",
-            "lengthMenu":  "{{_("Show _MENU_ entries")}}",
-            "search":  "{{_("Search:")}}",
-            "zeroRecords":  "{{_("No matching records found")}}"
+            "emptyTable": "{{ trans('datatable-builder::datatable.nodata') }}",
+            "info": "{{ trans('datatable-builder::datatable.info') }}",
+            "infoEmpty": "{{ trans('datatable-builder::datatable.infoEmpty') }}",
+            "infoFiltered": "{{ trans('datatable-builder::datatable.infoFiltered') }}",
+            "lengthMenu": "{{ trans('datatable-builder::datatable.lengthMenu') }}",
+            "search": "{{ trans('datatable-builder::datatable.search') }}",
+            "zeroRecords": "{{ trans('datatable-builder::datatable.zeroRecords') }}"
         },
          'fnServerData': function (sSource, aoData, fnCallback) {
             $.ajax

@@ -89,6 +89,8 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
         require_once($this->app['path'].'/TestDatatable.php');
 
         $this->assertFileExists($this->datatableFile);
+
+        \File::delete($this->app['path'].'/TestDatatable.php');
     }
 
     public function testDatatable()
@@ -199,15 +201,6 @@ class TestFilters extends EloquentDatatable
         //$this->model = $this->model->where('name', '=', 'John');
     }
 
-    public function setClassRow($datatable)
-    {
-        $datatable->setRowClass(function ($row)
-        {
-            return (isset($row->status) and empty($row->status)) ? 'danger' : '';
-        });
-
-        return $datatable;
-    }
 }
 
 use Orchestra\Testbench\Http\Kernel as BaseKernel;
