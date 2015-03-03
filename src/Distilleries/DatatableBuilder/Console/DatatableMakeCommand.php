@@ -1,7 +1,5 @@
 <?php namespace Distilleries\DatatableBuilder\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

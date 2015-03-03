@@ -7,6 +7,7 @@ trait DatatableStateTrait {
      * Injected by the constructor
      */
     protected $datatable;
+    protected $model;
 
 
     // ------------------------------------------------------------------------------------------------
