@@ -1,6 +1,7 @@
 [![Code quality](http://img.shields.io/scrutinizer/g/distilleries/datatablebuilder.svg?style=flat)](https://scrutinizer-ci.com/g/distilleries/datatablebuilder/?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
+[![Code Coverage](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/?branch=master)
 [![Build Status](https://travis-ci.org/Distilleries/DatatableBuilder.svg?branch=master)](https://travis-ci.org/Distilleries/DatatableBuilder)
+[![Total Downloads](https://img.shields.io/packagist/dt/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
 [![Latest Stable Version](https://img.shields.io/packagist/v/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE) 
 
