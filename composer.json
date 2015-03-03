@@ -11,11 +11,10 @@
     "require": {
         "php": ">=5.5.0",
         "illuminate/support": "5.*",
-        "illuminate/support": "5.*",
         "illuminate/html": "5.*",
         "illuminate/view": "5.*",
         "illuminate/filesystem": "5.*",
-        "chumper/datatable": "dev-develop",
+        "distilleries/datatable": "3.0.*",
         "distilleries/form-builder": "2.*"
     },
     "autoload": {
@@ -25,6 +24,11 @@
             "Distilleries\\DatatableBuilder\\": "src/Distilleries/DatatableBuilder"
         }
     },
-    "prefer-stable": true,
-    "minimum-stability": "dev"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "orchestra/database": "~3.0",
+        "orchestra/testbench": "~3.0",
+        "phpunit/phpunit": "~4.5",
+        "mockery/mockery": "0.9.*"
+    }
 }

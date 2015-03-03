@@ -1,12 +1,12 @@
 @section('datatable')
 @if(!empty($filters))
-    {{ $filters }}
+    {!! $filters !!}
 @endif
 
 <div class="portlet box green-haze">
     <div class="portlet-title">
         <div class="caption">
-            <i class="glyphicon glyphicon-th-list"></i>{{ _('Listing') }}
+            <i class="glyphicon glyphicon-th-list"></i>{{ trans('datatable-builder::datatable.listing') }}
         </div>
        <div class="tools">
             <a href="javascript:;" class="collapse"></a>

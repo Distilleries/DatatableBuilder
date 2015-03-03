@@ -17,7 +17,7 @@ class DatatableGenerator extends \Kris\LaravelFormBuilder\Console\FormGenerator
             "            ->add('",
             $field,
             "',null",
-            ",_('".ucfirst($field)."')",
+            ",trans('datatable.".strtolower($field)."')",
             ")",
             ($isLast) ? "" : "\n"
         ];

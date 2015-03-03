@@ -1,5 +1,6 @@
 [![Code quality](http://img.shields.io/scrutinizer/g/distilleries/datatablebuilder.svg?style=flat)](https://scrutinizer-ci.com/g/distilleries/datatablebuilder/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
+[![Build Status](https://travis-ci.org/Distilleries/DatatableBuilder.svg?branch=master)](https://travis-ci.org/Distilleries/DatatableBuilder)
 [![Latest Stable Version](https://img.shields.io/packagist/v/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE) 
 

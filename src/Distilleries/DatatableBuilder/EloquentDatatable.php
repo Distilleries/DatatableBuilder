@@ -4,7 +4,7 @@ use \Datatable;
 use Illuminate\Database\Eloquent\Model;
 use \ReflectionClass;
 use \FormBuilder;
-use \Input;
+use \Request;
 
 abstract class EloquentDatatable {
 
@@ -67,7 +67,7 @@ abstract class EloquentDatatable {
 
     public function applyFilters()
     {
-        $allInput = Input::all();
+        $allInput = Request::all();
         $columns  = \Schema::getColumnListing($this->model->getTable());
 
         foreach ($allInput as $name => $input)
@@ -174,15 +174,8 @@ abstract class EloquentDatatable {
 
     protected function getControllerNameForAction() {
 
-        $namespace = \Route::current()->getAction()['namespace'];
-        $action    = explode('@', \Route::currentRouteAction());
-
-        if (!empty($namespace))
-        {
-            $action[0] = ltrim(str_replace($namespace, '', $action[0]), '\\');
-        }
-
-        return $action[0];
+        $action = explode('@', \Route::currentRouteAction());
+        return '\\'.$action[0];
     }
 
     // ------------------------------------------------------------------------------------------------
