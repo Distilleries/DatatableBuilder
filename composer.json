@@ -1,6 +1,6 @@
 {
     "name": "distilleries/datatable-builder",
-    "description": "Datatable generator",
+    "description": "Based on https://github.com/chumper/datatable. It's an abstract class to implement the datatable like https://github.com/Distilleries/FormBuilder.",
     "license": "MIT",
     "authors": [
         {
@@ -10,10 +10,10 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "illuminate/support": "5.0.*",
-        "illuminate/html": "5.0.*",
-        "illuminate/view": "5.0.*",
-        "illuminate/filesystem": "5.0.*",
+        "illuminate/support": "5.*",
+        "illuminate/html": "5.*",
+        "illuminate/view": "5.*",
+        "illuminate/filesystem": "5.*",
         "distilleries/datatable": "3.0.*",
         "distilleries/form-builder": "2.*"
     },

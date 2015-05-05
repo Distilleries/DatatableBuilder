@@ -13,7 +13,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../../views', $this->package);
-        $this->loadTranslationsFrom(__DIR__.'/lang', $this->package);
+        $this->loadTranslationsFrom(__DIR__.'/../../lang', $this->package);
         $this->publishes([
             __DIR__.'/../../config/config.php'    => config_path($this->package.'.php'),
             __DIR__.'/../../config/datatable.php' => config_path('chumper_datatable.php'),

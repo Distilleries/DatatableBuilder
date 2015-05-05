@@ -95,12 +95,22 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
 
     public function testDatatable()
     {
+        $this->app['Illuminate\Contracts\Console\Kernel']->call('datatable:make', [
+            'name' => 'TestDatatable',
+            '--fields' => 'test1, test2',
+        ]);
+
         $this->call('GET', 'datatable');
         $this->assertResponseOk();
     }
 
     public function testFilters()
     {
+        $this->app['Illuminate\Contracts\Console\Kernel']->call('datatable:make', [
+            'name' => 'TestDatatable',
+            '--fields' => 'test1, test2',
+        ]);
+
         $view = $this->call('GET', 'filters?name=John');
         $this->assertViewHas('email', "email@test");
         //$this->assertResponseOk();
