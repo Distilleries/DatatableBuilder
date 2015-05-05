@@ -8,7 +8,7 @@
                 "sortAscending":"{{ trans('datatable-builder::datatable.activate_to_sort_asc') }}",
                 "sortDescending": "{{ trans('datatable-builder::datatable.activate_to_sort_desc') }}"
             },
-            "emptyTable": "{{ trans('datatable-builder::datatable.nodata') }}",
+            "emptyTable": "{{ trans('datatable-builder::datatable.no_data') }}",
             "info": "{{ trans('datatable-builder::datatable.info') }}",
             "infoEmpty": "{{ trans('datatable-builder::datatable.infoEmpty') }}",
             "infoFiltered": "{{ trans('datatable-builder::datatable.infoFiltered') }}",
