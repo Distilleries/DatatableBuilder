@@ -5,14 +5,14 @@
 'method' => 'put',
 'class'=>'form-inline']) !!}
 {!! Form::hidden('id',$data['id']) !!}
-{!! Form::button('<i class="glyphicon glyphicon-trash"></i> '._('Remove'),[
+{!! Form::button('<i class="glyphicon glyphicon-trash"></i> '.trans('datatable.remove'),[
 "type"=>"submit",
 "data-toggle"=>"confirmation",
 "data-placement"=>"right",
 "data-singleton"=>"true",
-"data-btn-cancel-label"=>_('No'),
-"data-btn-ok-label"=>_('Yes'),
-"data-title"=>_('Are you sure?'),
+"data-btn-cancel-label"=>trans('datatable.no'),
+"data-btn-ok-label"=>trans('datatable.yes'),
+"data-title"=>trans('datatable.are_you_sure'),
 "class"=>"btn btn-sm red filter-submit margin-bottom",
 ]) !!}
 {!! Form::close() !!}
