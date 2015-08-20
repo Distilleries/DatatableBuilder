@@ -1,9 +1,11 @@
-[![Code quality](http://img.shields.io/scrutinizer/g/distilleries/datatablebuilder.svg?style=flat)](https://scrutinizer-ci.com/g/distilleries/datatablebuilder/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Distilleries/DatatableBuilder/?branch=master)
 [![Build Status](https://travis-ci.org/Distilleries/DatatableBuilder.svg?branch=master)](https://travis-ci.org/Distilleries/DatatableBuilder)
-[![Total Downloads](https://img.shields.io/packagist/dt/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
-[![Latest Stable Version](https://img.shields.io/packagist/v/distilleries/datatable-builder.svg?style=flat)](https://packagist.org/packages/distilleries/datatable-builder)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE) 
+[![Total Downloads](https://poser.pugx.org/distilleries/datatable-builder/downloads)](https://packagist.org/packages/distilleries/datatable-builder)
+[![Latest Stable Version](https://poser.pugx.org/distilleries/datatable-builder/version)](https://packagist.org/packages/distilleries/datatable-builder)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
+
+
 
 #Laravel 5  Datatable Builder
 
