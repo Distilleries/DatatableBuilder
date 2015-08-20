@@ -26,6 +26,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
 
         Schema::create('users', function(Blueprint $table)
         {
+            $table->increments('id');
             $table->string('name');
             $table->string('email');
             $table->timestamps();
@@ -111,7 +112,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
             '--fields' => 'test1, test2',
         ]);
 
-        $view = $this->call('GET', 'filters?name=John');
+        $this->call('GET', 'filters?name=John');
         $this->assertViewHas('email', "email@test");
         //$this->assertResponseOk();
     }
@@ -182,6 +183,20 @@ class FilterController extends \Illuminate\Routing\Controller {
             'datatable' => $this->getIndexDatatable(),
             'email' => $this->getDatatable()->getData()->aaData[0]->{'1'}
         ]);
+    }
+
+    public function getView()
+    {
+
+    }
+
+    public function getEdit()
+    {
+
+    }
+    public function putDestroy()
+    {
+
     }
 }
 

@@ -13,8 +13,11 @@ return [
     'infoFiltered'          => '(filtered1 from _MAX_ total entries)',
     'lengthMenu'            => 'Show _MENU_ entries',
     'zeroRecords'           => 'No matching records found"',
-    'no'                    => 'No',
-    'yes'                   => 'Yes',
-    'are_you_sure'          => 'Are you sure?',
+    'view'                  => 'View',
+    'edit'                  => 'Edit',
     'remove'                => 'Remove',
+    'yes'                   => 'Yes',
+    'no'                    => 'No',
+    'are_you_sure'          => 'Are you sure?',
+
 ];
