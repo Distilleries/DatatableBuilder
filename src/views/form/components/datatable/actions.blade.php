@@ -1,5 +1,5 @@
-<a href="{{ action($route.'getView',$data['id']) }}" class="btn btn-sm blue filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{_('View')}}</a>
-<a href="{{ action($route.'getEdit',$data['id']) }}" class="btn btn-sm yellow filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{_('Edit')}}</a>
+<a href="{{ action($route.'getView',$data['id']) }}" class="btn btn-sm blue filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{trans('datatable-builder::datatable.view')}}</a>
+<a href="{{ action($route.'getEdit',$data['id']) }}" class="btn btn-sm yellow filter-submit margin-bottom"><i class="glyphicon glyphicon-edit"></i> {{trans('datatable-builder::datatable.edit')}}</a>
 {!! Form::open([
 'url' => action($route.'putDestroy'),
 'method' => 'put',
