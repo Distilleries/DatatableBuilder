@@ -10,12 +10,12 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "illuminate/support": "5.1.*",
-        "illuminate/html": "5.0.*",
-        "illuminate/view": "5.1.*",
-        "illuminate/filesystem": "5.1.*",
+        "illuminate/support": "5.2.*",
+        "illuminate/html": "5.*",
+        "illuminate/view": "5.2.*",
+        "illuminate/filesystem": "5.2.*",
         "distilleries/datatable": "3.0.*",
-        "distilleries/form-builder": "2.3.*"
+        "distilleries/form-builder": "2.4.*"
     },
     "autoload": {
         "classmap": [
@@ -26,8 +26,8 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "orchestra/database": "~3.1",
-        "orchestra/testbench": "~3.1",
+        "orchestra/database": "~3.2",
+        "orchestra/testbench": "~3.2",
         "phpunit/phpunit": "~4.5",
         "mockery/mockery": "0.9.*"
     }
