@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'filters'               => 'Filters',
     'search'                => 'Search',
     'reset'                 => 'Reset',
@@ -10,7 +11,7 @@ return [
     'no_data'               => 'No data available in table',
     'info'                  => 'Showing _START_ to _END_ of _TOTAL_ entries',
     'infoEmpty'             => 'No entries found',
-    'infoFiltered'          => '(filtered1 from _MAX_ total entries)',
+    'infoFiltered'          => '(filtered from _MAX_ total entries)',
     'lengthMenu'            => 'Show _MENU_ entries',
     'zeroRecords'           => 'No matching records found"',
     'view'                  => 'View',
