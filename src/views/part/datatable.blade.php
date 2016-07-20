@@ -17,6 +17,7 @@
             <div class="">
             {!! Datatable::table()
                         ->addColumn($colomns_display)
+                        ->setOptions($datatable_options)
                         ->setUrl(action($route))
                         ->render() !!}
             </div>
