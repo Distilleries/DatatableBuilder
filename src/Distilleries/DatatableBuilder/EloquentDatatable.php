@@ -194,7 +194,7 @@ abstract class EloquentDatatable {
                                 $this->defaultOrder[$keyOrder][0] = $key;
                             }
                         }
-                        if (is_string($order[0])) {
+                        if (is_string($this->defaultOrder[$keyOrder][0])) {
                             $this->defaultOrder[$keyOrder][0] = 0;
                         }
                     }
