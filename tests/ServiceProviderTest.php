@@ -85,7 +85,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
     {
         $this->app['Illuminate\Contracts\Console\Kernel']->call('datatable:make', [
             'name' => 'TestDatatable',
-            '--fields' => 'test1, test2',
+            '--fields' => 'name, email',
         ]);
         require_once($this->app['path'].'/TestDatatable.php');
 
@@ -98,7 +98,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
     {
         $this->app['Illuminate\Contracts\Console\Kernel']->call('datatable:make', [
             'name' => 'TestDatatable',
-            '--fields' => 'test1, test2',
+            '--fields' => 'name, email',
         ]);
 
         $this->call('GET', 'datatable');
@@ -109,7 +109,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
     {
         $this->app['Illuminate\Contracts\Console\Kernel']->call('datatable:make', [
             'name' => 'TestDatatable',
-            '--fields' => 'test1, test2',
+            '--fields' => 'name, email',
         ]);
 
         $this->call('GET', 'filters?name=John');
