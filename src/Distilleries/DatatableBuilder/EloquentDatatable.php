@@ -92,6 +92,7 @@ abstract class EloquentDatatable {
 
         $datatable        = Datatable::query($this->model);
         $colSearchAndSort = array();
+        $sortOnly = array();
 
         if (!empty($this->colomns))
         {
@@ -106,17 +107,17 @@ abstract class EloquentDatatable {
                 } else if (is_array($value) && count($value) == 2)
                 {
                     $datatable->addColumn($value[0], $value[1]);
+                    $sortOnly[] = $value[0];
                 }
 
             }
         }
 
         $datatable = $this->setClassRow($datatable);
-        $datatable->orderColumns($colSearchAndSort);
+        $datatable->orderColumns(array_merge($colSearchAndSort, $sortOnly));
         $datatable->searchColumns($colSearchAndSort);
 
         return $datatable->make();
-
     }
 
     public function setClassRow($datatable)
