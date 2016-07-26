@@ -12,6 +12,10 @@ abstract class EloquentDatatable {
     protected $colomns;
     protected $form = null;
     protected $colomnsDisplay = [];
+    protected $datatableOptions = [];
+
+    // 0 can be an integer to represents the column's number or it can be a string that references the column's name
+    protected $defaultOrder = [[0, 'desc']];
 
     // ------------------------------------------------------------------------------------------------
 
@@ -88,6 +92,7 @@ abstract class EloquentDatatable {
 
         $datatable        = Datatable::query($this->model);
         $colSearchAndSort = array();
+        $sortOnly = array();
 
         if (!empty($this->colomns))
         {
@@ -102,17 +107,17 @@ abstract class EloquentDatatable {
                 } else if (is_array($value) && count($value) == 2)
                 {
                     $datatable->addColumn($value[0], $value[1]);
+                    $sortOnly[] = $value[0];
                 }
 
             }
         }
 
         $datatable = $this->setClassRow($datatable);
-        $datatable->orderColumns($colSearchAndSort);
+        $datatable->orderColumns(array_merge($colSearchAndSort, $sortOnly));
         $datatable->searchColumns($colSearchAndSort);
 
         return $datatable->make();
-
     }
 
     public function setClassRow($datatable)
@@ -131,6 +136,7 @@ abstract class EloquentDatatable {
     {
         return view($template, [
             'colomns_display' => $this->colomnsDisplay,
+            'datatable_options' => $this->addOptions(),
             'route'           => !empty($route) ? $route : $this->getControllerNameForAction().'@getDatatable',
             'filters'         => $this->addFilter(),
         ]);
@@ -168,6 +174,36 @@ abstract class EloquentDatatable {
 
         return $filter_content;
 
+    }
+
+    // ------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------------------------
+
+
+    protected function addOptions()
+    {
+        if (!array_key_exists('order', $this->datatableOptions) && !empty($this->defaultOrder)) {
+            if (is_array($this->defaultOrder)) {
+                foreach ($this->defaultOrder as $keyOrder => $order) {
+                    if (is_string($order[0])) {
+                        foreach ($this->colomns as $key => $colomn) {
+                            if (is_array($colomn)) {
+                                $colomn = $colomn[0];
+                            }
+                            if ($colomn == $order[0]) {
+                                $this->defaultOrder[$keyOrder][0] = $key;
+                            }
+                        }
+                        if (is_string($this->defaultOrder[$keyOrder][0])) {
+                            $this->defaultOrder[$keyOrder][0] = 0;
+                        }
+                    }
+                }
+                $this->datatableOptions['order'] = $this->defaultOrder;
+            }
+        }
+        return $this->datatableOptions;
     }
 
     // ------------------------------------------------------------------------------------------------
