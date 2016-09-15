@@ -50,12 +50,21 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
             'prefix'   => '',
         ));
 
-        $app['router']->controller('datatable', 'Orchestra\Testbench\TestCase\DatatableController');
-        $app['router']->controller('filters', 'Orchestra\Testbench\TestCase\FilterController');
+
+
+        $app['router']->get('datatable', 'Orchestra\Testbench\TestCase\DatatableController@getIndex');
+        $app['router']->get('datatable/index-datatable', 'Orchestra\Testbench\TestCase\DatatableController@getIndexDatatable');
+        $app['router']->get('datatable/datatable', 'Orchestra\Testbench\TestCase\DatatableController@getDatatable');
+        $app['router']->get('filters', 'Orchestra\Testbench\TestCase\FilterController@getIndex');
+        $app['router']->get('filters/index-datatable', 'Orchestra\Testbench\TestCase\FilterController@getIndexDatatable');
+        $app['router']->get('filters/datatable', 'Orchestra\Testbench\TestCase\FilterController@getDatatable');
+        $app['router']->get('filters/view/{id?}', 'Orchestra\Testbench\TestCase\FilterController@getView');
+        $app['router']->get('filters/edit/{id?}', 'Orchestra\Testbench\TestCase\FilterController@getEdit');
+        $app['router']->put('filters/destroy', 'Orchestra\Testbench\TestCase\FilterController@putDestroy');
 
     }
 
-    protected function getPackageProviders()
+    protected function getPackageProviders($application)
     {
         return [
             'Distilleries\FormBuilder\FormBuilderServiceProvider',
@@ -63,7 +72,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\TestCase
         ];
     }
 
-    protected function getPackageAliases()
+    protected function getPackageAliases($application)
     {
         return [
             'FormBuilder'   => 'Distilleries\FormBuilder\Facades\FormBuilder',
