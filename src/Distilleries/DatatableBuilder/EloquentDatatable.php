@@ -6,7 +6,8 @@ use \ReflectionClass;
 use \FormBuilder;
 use \Request;
 
-abstract class EloquentDatatable {
+abstract class EloquentDatatable
+{
 
     protected $model;
     protected $colomns;
@@ -41,14 +42,12 @@ abstract class EloquentDatatable {
      */
     public function add($name, $closure = null, $translation = '')
     {
-        if (!empty($closure))
-        {
+        if (!empty($closure)) {
             $this->colomns[] = [
                 $name,
                 $closure
             ];
-        } else
-        {
+        } else {
             $this->colomns[] = $name;
         }
 
@@ -74,10 +73,8 @@ abstract class EloquentDatatable {
         $allInput = Request::all();
         $columns  = \Schema::getColumnListing($this->model->getTable());
 
-        foreach ($allInput as $name => $input)
-        {
-            if (in_array($name, $columns) && $input != '')
-            {
+        foreach ($allInput as $name => $input) {
+            if (in_array($name, $columns) && $input != '') {
 
                 $this->model = $this->model->where($name, '=', $input);
             }
@@ -91,23 +88,21 @@ abstract class EloquentDatatable {
         $this->applyFilters();
 
         $datatable        = Datatable::query($this->model);
-        $colSearchAndSort = array();
-        $sortOnly = array();
+        $colSearchAndSort = [];
+        $sortOnly         = [];
 
-        if (!empty($this->colomns))
-        {
-            foreach ($this->colomns as $key => $value)
-            {
+        if (!empty($this->colomns)) {
+            foreach ($this->colomns as $key => $value) {
 
-                if (is_string($value))
-                {
+                if (is_string($value)) {
                     $datatable->showColumns($value);
                     $colSearchAndSort[] = $value;
 
-                } else if (is_array($value) && count($value) == 2)
-                {
-                    $datatable->addColumn($value[0], $value[1]);
-                    $sortOnly[] = $value[0];
+                } else {
+                    if (is_array($value) && count($value) == 2) {
+                        $datatable->addColumn($value[0], $value[1]);
+                        $sortOnly[] = $value[0];
+                    }
                 }
 
             }
@@ -123,8 +118,7 @@ abstract class EloquentDatatable {
     public function setClassRow($datatable)
     {
         //DT_RowClass
-        $datatable->setRowClass(function($row)
-        {
+        $datatable->setRowClass(function ($row) {
             return (isset($row->status) && empty($row->status)) ? 'danger' : '';
         });
 
@@ -135,10 +129,11 @@ abstract class EloquentDatatable {
     public function generateHtmlRender($template = 'datatable-builder::part.datatable', $route = '')
     {
         return view($template, [
-            'colomns_display' => $this->colomnsDisplay,
+            'colomns_display'   => $this->colomnsDisplay,
             'datatable_options' => $this->addOptions(),
-            'route'           => !empty($route) ? $route : $this->getControllerNameForAction().'@getDatatable',
-            'filters'         => $this->addFilter(),
+            'id'                => strtolower(str_replace('\\','_',get_class($this))),
+            'route'             => !empty($route) ? $route : $this->getControllerNameForAction() . '@getDatatable',
+            'filters'           => $this->addFilter(),
         ]);
     }
 
@@ -148,12 +143,11 @@ abstract class EloquentDatatable {
 
         $reflection = new ReflectionClass(get_class($this));
 
-        $this->add('actions', function($model) use ($template, $reflection, $route)
-        {
-            return view($template, array(
+        $this->add('actions', function ($model) use ($template, $reflection, $route) {
+            return view($template, [
                 'data'  => $model->toArray(),
-                'route' => !empty($route) ? $route.'@' : $this->getControllerNameForAction().'@'
-            ))->render();
+                'route' => !empty($route) ? $route . '@' : $this->getControllerNameForAction() . '@'
+            ])->render();
         });
     }
 
@@ -203,15 +197,18 @@ abstract class EloquentDatatable {
                 $this->datatableOptions['order'] = $this->defaultOrder;
             }
         }
+
         return $this->datatableOptions;
     }
 
     // ------------------------------------------------------------------------------------------------
 
-    protected function getControllerNameForAction() {
+    protected function getControllerNameForAction()
+    {
 
         $action = explode('@', \Route::currentRouteAction());
-        return '\\'.$action[0];
+
+        return '\\' . $action[0];
     }
 
     // ------------------------------------------------------------------------------------------------
