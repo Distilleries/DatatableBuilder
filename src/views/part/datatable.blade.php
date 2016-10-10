@@ -16,6 +16,7 @@
         <div class="dataTables_wrapper no-footer">
             <div class="">
             {!! Datatable::table()
+                        ->setId($id)
                         ->addColumn($colomns_display)
                         ->setOptions($datatable_options)
                         ->setUrl(action($route))

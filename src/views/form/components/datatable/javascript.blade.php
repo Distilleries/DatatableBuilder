@@ -2,7 +2,7 @@
     jQuery(document).ready(function(){
         // dynamic table
         oTable = jQuery('#{{ $id }}').dataTable({
-
+        stateSave:true,
         "language": {
             "aria": {
                 "sortAscending":"{{ trans('datatable-builder::datatable.activate_to_sort_asc') }}",
