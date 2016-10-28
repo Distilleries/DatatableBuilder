@@ -1,4 +1,6 @@
-<?php namespace {{namespace}};
+<?php
+
+namespace {{namespace}};
 
 use Distilleries\DatatableBuilder\EloquentDatatable;
 
@@ -9,6 +11,5 @@ class {{class}} extends EloquentDatatable
         {{fields}}
 
         $this->addDefaultAction();
-
     }
 }

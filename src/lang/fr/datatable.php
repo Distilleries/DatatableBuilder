@@ -15,10 +15,10 @@ return [
     'lengthMenu'            => 'Voir _MENU_ éléments',
     'zeroRecords'           => 'Aucun résultat trouvé "',
     'view'                  => 'Voir',
-    'edit'                  => 'Editer',
+    'edit'                  => 'Éditer',
     'remove'                => 'Effacer',
     'yes'                   => 'Oui',
     'no'                    => 'Non',
-    'are_you_sure'          => 'Etes-vous sûr ?',
+    'are_you_sure'          => 'Êtes-vous sûr ?',
 
 ];

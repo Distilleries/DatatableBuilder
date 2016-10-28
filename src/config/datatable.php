@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -9,7 +9,7 @@ return array(
     |
     */
 
-    'table' => array(
+    'table' => [
 
         /*
         |--------------------------------------------------------------------------
@@ -48,13 +48,13 @@ return array(
         |
         */
 
-        'options' => array(
+        'options' => [
 
-            "sPaginationType" => "full_numbers",
+            'sPaginationType' => 'full_numbers',
 
-            "bProcessing" => true
+            'bProcessing' => true,
 
-        ),
+        ],
 
         /*
         |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return array(
         |
         */
 
-        'callbacks' => array(),
+        'callbacks' => [],
 
         /*
         |--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ return array(
         'script_view' => 'datatable-builder::form.components.datatable.javascript',
 
 
-    ),
+    ],
 
 
     /*
@@ -119,7 +119,7 @@ return array(
     |
     */
 
-    'engine' => array(
+    'engine' => [
 
         /*
         |--------------------------------------------------------------------------
@@ -133,7 +133,6 @@ return array(
 
         'exactWordSearch' => false,
 
-    )
+    ],
 
-
-);
+];
