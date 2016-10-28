@@ -1,12 +1,16 @@
-<?php  namespace Distilleries\DatatableBuilder\Console\Lib\Generators;
+<?php
 
-class DatatableGenerator extends \Kris\LaravelFormBuilder\Console\FormGenerator
+namespace Distilleries\DatatableBuilder\Console\Lib\Generators;
+
+use Kris\LaravelFormBuilder\Console\FormGenerator;
+
+class DatatableGenerator extends FormGenerator
 {
 
     /**
-     * Prepare template for single add field
+     * Prepare template for single add field.
      *
-     * @param      $field
+     * @param string $field
      * @param bool $isLast
      * @return string
      */
@@ -16,8 +20,8 @@ class DatatableGenerator extends \Kris\LaravelFormBuilder\Console\FormGenerator
         $textArr = [
             "            ->add('",
             $field,
-            "',null",
-            ",trans('datatable.".strtolower($field)."')",
+            "', null",
+            ", trans('datatable." . strtolower($field) . "')",
             ")",
             ($isLast) ? "" : "\n"
         ];

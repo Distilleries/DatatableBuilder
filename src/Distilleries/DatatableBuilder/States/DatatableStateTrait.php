@@ -1,31 +1,43 @@
-<?php namespace Distilleries\DatatableBuilder\States;
+<?php
 
-trait DatatableStateTrait {
+namespace Distilleries\DatatableBuilder\States;
 
+trait DatatableStateTrait
+{
     /**
+     * Datatable (injected by the constructor).
+     *
      * @var \Distilleries\DatatableBuilder\EloquentDatatable $datatable
-     * Injected by the constructor
      */
     protected $datatable;
+
+    /**
+     * Model (injected by the contructor).
+     *
+     * @var \Illuminate\Database\Eloquent\Model $model
+     */
     protected $model;
 
-
-    // ------------------------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------------------------
-    // ------------------------------------------------------------------------------------------------
-
+    /**
+     * View to display datatable.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getIndexDatatable()
     {
         $this->datatable->build();
         $datatable = $this->datatable->generateHtmlRender();
 
         return view('datatable-builder::form.state.datatable')->with([
-            'datatable' => $datatable
+            'datatable' => $datatable,
         ]);
     }
 
-    // ------------------------------------------------------------------------------------------------
-
+    /**
+     * Return generated datatable.
+     *
+     * @return mixed
+     */
     public function getDatatable()
     {
         $this->datatable->setModel($this->model);

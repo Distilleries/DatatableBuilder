@@ -1,26 +1,21 @@
-<?php namespace Distilleries\DatatableBuilder\Console;
+<?php
+
+namespace Distilleries\DatatableBuilder\Console;
 
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Console\Input\InputArgument;
+use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 use Distilleries\DatatableBuilder\Console\Lib\Generators\DatatableGenerator;
 
-class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
+class DatatableMakeCommand extends GeneratorCommand
 {
-
     /**
      * The console command name.
      *
      * @var string
      */
     protected $name = 'datatable:make';
-
-    /**
-     * The filesystem instance.
-     *
-     * @var \Illuminate\Filesystem\Filesystem
-     */
-    protected $files;
 
     /**
      * The console command description.
@@ -30,16 +25,31 @@ class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
     protected $description = 'Creates a datable builder class.';
 
     /**
-     * @var DatatableGenerator
+     * The filesystem instance.
+     *
+     * @var \Illuminate\Filesystem\Filesystem
+     */
+    protected $files;
+
+    /**
+     * Datatable generator instance.
+     *
+     * @var \Distilleries\DatatableBuilder\Console\Lib\Generators\DatatableGenerator
      */
     protected $formGenerator;
 
+    /**
+     * DatatableMakeCommand constructor.
+     *
+     * @param \Illuminate\Filesystem\Filesystem $files
+     * @param \Distilleries\DatatableBuilder\Console\Lib\Generators\DatatableGenerator $formGenerator
+     */
     public function __construct(Filesystem $files, DatatableGenerator $formGenerator)
     {
         parent::__construct($files);
+        
         $this->formGenerator = $formGenerator;
     }
-
 
     /**
      * Get the console command arguments.
@@ -48,9 +58,9 @@ class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
      */
     protected function getArguments()
     {
-        return array(
-            array('name', InputArgument::REQUIRED, 'Full path for datatable class.'),
-        );
+        return [
+            ['name', InputArgument::REQUIRED, 'Full path for datatable class.'],
+        ];
     }
 
     /**
@@ -60,16 +70,16 @@ class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
      */
     protected function getOptions()
     {
-        return array(
-            array('fields', null, InputOption::VALUE_OPTIONAL, 'Fields for the datatable'),
-        );
+        return [
+            ['fields', null, InputOption::VALUE_OPTIONAL, 'Fields for the datatable'],
+        ];
     }
 
     /**
      * Replace the class name for the given stub.
      *
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      * @return string
      */
     protected function replaceClass($stub, $name)
@@ -92,13 +102,12 @@ class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
     /**
      * Replace the namespace for the given stub.
      *
-     * @param  string $stub
-     * @param  string $name
+     * @param string $stub
+     * @param string $name
      * @return $this
      */
     protected function replaceNamespace(&$stub, $name)
     {
-
         $stub = str_replace(
             '{{namespace}}',
             $this->formGenerator->getClassInfo($name)->namespace,
@@ -125,6 +134,6 @@ class DatatableMakeCommand extends \Illuminate\Console\GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/Lib/stubs/datatable-class-template.stub';
+        return __DIR__ . '/Lib/stubs/datatable-class-template.stub';
     }
 }
