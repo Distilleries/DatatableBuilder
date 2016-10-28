@@ -131,7 +131,7 @@ abstract class EloquentDatatable
                     $datatable->showColumns($value);
                     $colSearchAndSort[] = $value;
                 } else {
-                    if (is_array($value) and (count($value) === 2)) {
+                    if (is_array($value) && (count($value) === 2)) {
                         $datatable->addColumn($value[0], $value[1]);
                         $sortOnly[] = $value[0];
                     }
@@ -149,13 +149,13 @@ abstract class EloquentDatatable
     /**
      * Set DT_RowClass for given datatable.
      *
-     * @param \Chumper\Datatable\Datatable $datatable
-     * @return \Chumper\Datatable\Datatable
+     * @param \Chumper\Datatable\Engines\QueryEngine $datatable
+     * @return \Chumper\Datatable\Engines\QueryEngine
      */
     public function setClassRow($datatable)
     {
         $datatable->setRowClass(function ($row) {
-            return (isset($row->status) and empty($row->status)) ? 'danger' : '';
+            return (isset($row->status) && empty($row->status)) ? 'danger' : '';
         });
 
         return $datatable;
@@ -225,7 +225,7 @@ abstract class EloquentDatatable
      */
     protected function addOptions()
     {
-        if (! array_key_exists('order', $this->datatableOptions) and ! empty($this->defaultOrder)) {
+        if (! array_key_exists('order', $this->datatableOptions) && ! empty($this->defaultOrder)) {
             if (is_array($this->defaultOrder)) {
                 foreach ($this->defaultOrder as $keyOrder => $order) {
                     if (is_string($order[0])) {
@@ -282,8 +282,7 @@ abstract class EloquentDatatable
 
         $allInput = Request::all();
         foreach ($allInput as $name => $input) {
-            if (in_array($name, $columns) and ($input != '')) {
-
+            if (in_array($name, $columns) && ($input != '')) {
                 $this->model = $this->model->where($name, '=', $input);
             }
         }
