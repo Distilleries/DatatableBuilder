@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Schema;
 
 use \Mockery as m;
 
-class ServiceProviderTest extends \Orchestra\Testbench\TestCase
+class ServiceProviderTest extends \Orchestra\Testbench\BrowserKit\TestCase
 {
     protected $datatableFile;
 

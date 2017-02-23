@@ -10,11 +10,11 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.3.*",
-        "illuminate/view": "5.3.*",
-        "illuminate/filesystem": "5.3.*",
+        "illuminate/support": "5.4.*",
+        "illuminate/view": "5.4.*",
+        "illuminate/filesystem": "5.4.*",
         "distilleries/datatable": "3.0.*",
-        "distilleries/form-builder": "2.8.*"
+        "distilleries/form-builder": "2.9.*"
     },
     "autoload": {
         "classmap": [
@@ -23,11 +23,14 @@
             "Distilleries\\DatatableBuilder\\": "src/Distilleries/DatatableBuilder"
         }
     },
-    "minimum-stability": "stable",
     "require-dev": {
-        "orchestra/database": "~3.3",
-        "orchestra/testbench": "~3.3",
-        "phpunit/phpunit": "~4.5",
-        "mockery/mockery": "0.9.*"
-    }
+        "orchestra/database": "3.4.*",
+        "orchestra/testbench": "3.4.*",
+        "orchestra/testbench-browser-kit": "3.4.*",
+        "phpunit/phpunit": "~5.7",
+        "mockery/mockery": "0.9.*",
+        "fzaninotto/faker": "1.6.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

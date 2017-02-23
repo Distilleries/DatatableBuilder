@@ -42,7 +42,7 @@ class DatatableBuilderServiceProvider extends ServiceProvider {
         );
 
 
-        $this->app['datatable'] = $this->app->share(function()
+        $this->app->singleton('datatable',function()
         {
             return new Datatable;
         });
