@@ -13,7 +13,7 @@
         "illuminate/support": "5.3.*",
         "illuminate/view": "5.3.*",
         "illuminate/filesystem": "5.3.*",
-        "distilleries/datatable": "3.0.*",
+        "distilleries/datatable": "3.1.*",
         "distilleries/form-builder": "2.8.*"
     },
     "autoload": {
