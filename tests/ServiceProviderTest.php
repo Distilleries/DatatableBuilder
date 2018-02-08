@@ -19,7 +19,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\BrowserKit\TestCase
 
         parent::setUp();
 
-        $this->app['Illuminate\Contracts\Console\Kernel']->call('vendor:publish');
+        $this->app['Illuminate\Contracts\Console\Kernel']->call('vendor:publish', ['--all' => true]);
 
         $this->refreshApplication();
         $this->datatableFile = $this->app['path'].'/TestDatatable.php';
