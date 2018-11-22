@@ -19,9 +19,10 @@ It's an abstract class to implement the datatable like [the form generator](http
 1. [Installation](#installation)
 2. [Basic usage](#basic-usage)
 3. [Closure](#closure)
-4. [Filters](#filters)
-5. [Styles](#styles)
-6. [Controller](#controller)
+4. [BaseQuery](#base-query)
+5. [Filters](#filters)
+6. [Styles](#styles)
+7. [Controller](#controller)
   
 
 
@@ -147,13 +148,14 @@ class SongDatatable extends EloquentDatatable
 
 The method `add` have in param:
 
-`add($name, $closure = null, $translation = '')`
+`add($name, $closure = null, $translation = '', $orderable = true)`
 
 Param | Usage
 ----- | -----
 name  | Name of the column
 closure  | Function with the model in parameter to return a template. By default null use the attribute of the model.
 translation | Translation of the column, by default empty use the column name
+orderable | Flag to handle column orderable state, by default true
 
 
 ## Closure
@@ -193,6 +195,22 @@ You can return a template if you want:
     });
 ```   
 
+## BaseQuery
+
+You can override the base query for the datatable query.
+
+By default it will send a fresh full Query: `$this->model->newModelQuery();`
+
+``` php
+    /**
+     * {@inheritdoc}
+     */
+    protected function baseQuery()
+    {
+        return $this->model->newModelQuery()
+            ->selectRaw("id, data->>'$.title' AS title, data->>'$.chapo' AS intro, created_at");
+    }
+```
 
 ## Filters
 You can use complex filter to filter your datatable.
