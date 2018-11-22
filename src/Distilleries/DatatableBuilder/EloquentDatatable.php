@@ -18,6 +18,13 @@ abstract class EloquentDatatable
      * @var \Illuminate\Database\Eloquent\Model
      */
     protected $model;
+
+    /**
+     * Eloquent model underlying table.
+     * 
+     * @var string
+     */
+    protected $table = '';
     
     /**
      * Datatable columns.
@@ -61,7 +68,9 @@ abstract class EloquentDatatable
      */
     public function __construct(Model $model = null)
     {
-        $this->model = $model;
+        if (!empty($model)) {
+            $this->setModel($model);
+        }
     }
 
     /**
@@ -73,6 +82,7 @@ abstract class EloquentDatatable
     public function setModel(Model $model)
     {
         $this->model = $model;
+        $this->table = $this->model->getTable();
     }
 
     /**
@@ -118,6 +128,8 @@ abstract class EloquentDatatable
      */
     public function generateColomns()
     {
+        $this->model = $this->baseQuery();
+
         $this->applyFilters();
 
         $datatable = Datatable::query($this->model);
@@ -144,6 +156,16 @@ abstract class EloquentDatatable
         $datatable->searchColumns($colSearchAndSort);
 
         return $datatable->make();
+    }
+
+    /**
+     * Return Datatable base query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    protected function baseQuery()
+    {
+        return $this->model->newModelQuery();
     }
 
     /**
@@ -278,12 +300,12 @@ abstract class EloquentDatatable
      */
     public function applyFilters()
     {
-        $columns = Schema::getColumnListing($this->model->getTable());
+        $columns = Schema::getColumnListing($this->table);
 
         $allInput = Request::all();
         foreach ($allInput as $name => $input) {
             if (in_array($name, $columns) && ($input != '')) {
-                $this->model = $this->model->where($name, '=', $input);
+                $this->model = $this->model->where($this->table . '.' . $name, '=', $input);
             }
         }
     }
