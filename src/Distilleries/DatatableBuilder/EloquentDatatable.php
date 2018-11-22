@@ -41,6 +41,13 @@ abstract class EloquentDatatable
     protected $colomnsDisplay = [];
 
     /**
+     * Datatable columns orderable state.
+     *
+     * @var array
+     */
+    protected $columnsOrderable = [];
+
+    /**
      * Datatable extra options.
      *
      * @var array
@@ -81,9 +88,10 @@ abstract class EloquentDatatable
      * @param string $name
      * @param \Closure|null $closure
      * @param string|\Symfony\Component\Translation\TranslatorInterface $translation
+     * @param bool $orderable
      * @return $this
      */
-    public function add($name, $closure = null, $translation = '')
+    public function add($name, $closure = null, $translation = '', $orderable = true)
     {
         if (! empty($closure)) {
             $this->colomns[] = [
@@ -95,6 +103,7 @@ abstract class EloquentDatatable
         }
 
         $this->addTranslation($name, $translation);
+        $this->addOrderable($name, $orderable);
 
         return $this;
     }
@@ -109,6 +118,18 @@ abstract class EloquentDatatable
     public function addTranslation($name, $translation)
     {
         $this->colomnsDisplay[] = ! empty($translation) ? $translation : ucfirst($name);
+    }
+
+    /**
+     * Add orderable column.
+     *
+     * @param string $name
+     * @param bool $translation
+     * @return void
+     */
+    public function addOrderable($name, $orderable)
+    {
+        $this->columnsOrderable[$name] = $orderable;
     }
 
     /**
@@ -195,7 +216,7 @@ abstract class EloquentDatatable
                 'data' => $model->toArray(),
                 'route' => ! empty($route) ? $route . '@' : $this->getControllerNameForAction() . '@',
             ])->render();
-        });
+        }, 'Actions', false);
     }
 
     /**
@@ -244,6 +265,18 @@ abstract class EloquentDatatable
                 }
                 $this->datatableOptions['order'] = $this->defaultOrder;
             }
+        }
+
+        $nonOrderableColumns = [];
+        foreach (array_values($this->columnsOrderable) as $index => $orderableState) {
+            if (!$orderableState) {
+                $nonOrderableColumns[] = $index;
+            }
+        }
+        if (!empty($nonOrderableColumns)) {
+            $this->datatableOptions['columnDefs'] = [
+                ['orderable' => false, 'targets' => $nonOrderableColumns],
+            ];
         }
 
         return $this->datatableOptions;
