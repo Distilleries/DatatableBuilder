@@ -186,7 +186,7 @@ abstract class EloquentDatatable
      */
     protected function baseQuery()
     {
-        return $this->model->newModelQuery();
+        return $this->model->query();
     }
 
     /**
