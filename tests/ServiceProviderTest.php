@@ -15,7 +15,8 @@ class ServiceProviderTest extends \Orchestra\Testbench\BrowserKit\TestCase
 {
     protected $datatableFile;
 
-    public function setUp(){
+    protected function setUp(): void
+    {
 
         parent::setUp();
 
@@ -126,7 +127,7 @@ class ServiceProviderTest extends \Orchestra\Testbench\BrowserKit\TestCase
         //$this->assertResponseOk();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
         m::close();
